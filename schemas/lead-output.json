@@ -1,0 +1,84 @@
+{
+  "name": "lead_extraction",
+  "strict": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "property_type": {
+        "type": ["string", "null"],
+        "enum": ["apartment", "house", "townhouse", "commercial", "land", null]
+      },
+      "deal_type": {
+        "type": ["string", "null"],
+        "enum": ["buy", "rent", null]
+      },
+      "new_or_secondary": {
+        "type": ["string", "null"],
+        "enum": ["new", "secondary", "any", null]
+      },
+      "rooms": {
+        "type": ["string", "null"]
+      },
+      "price_min": {
+        "type": ["integer", "null"]
+      },
+      "price_max": {
+        "type": ["integer", "null"]
+      },
+      "area_min": {
+        "type": ["number", "null"]
+      },
+      "area_max": {
+        "type": ["number", "null"]
+      },
+      "districts": {
+        "type": "array",
+        "items": {"type": "string"}
+      },
+      "city": {
+        "type": ["string", "null"]
+      },
+      "purpose": {
+        "type": ["string", "null"],
+        "enum": ["live", "invest", "rent_out", null]
+      },
+      "timeline": {
+        "type": ["string", "null"],
+        "enum": ["asap", "1-3_months", "3-6_months", "6+_months", null]
+      },
+      "mortgage_needed": {
+        "type": ["boolean", "null"]
+      },
+      "has_first_payment": {
+        "type": ["boolean", "null"]
+      },
+      "first_payment_amount": {
+        "type": ["integer", "null"]
+      },
+      "selling_other_property": {
+        "type": ["boolean", "null"]
+      },
+      "materinsky_capital": {
+        "type": ["boolean", "null"]
+      },
+      "name": {
+        "type": ["string", "null"]
+      },
+      "phone": {
+        "type": ["string", "null"]
+      },
+      "additional_notes": {
+        "type": ["string", "null"]
+      }
+    },
+    "required": [
+      "property_type", "deal_type", "new_or_secondary", "rooms",
+      "price_min", "price_max", "area_min", "area_max",
+      "districts", "city", "purpose", "timeline",
+      "mortgage_needed", "has_first_payment", "first_payment_amount",
+      "selling_other_property", "materinsky_capital",
+      "name", "phone", "additional_notes"
+    ],
+    "additionalProperties": false
+  }
+}

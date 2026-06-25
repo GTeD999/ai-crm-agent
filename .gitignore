@@ -1,0 +1,136 @@
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.venv/
+.env
+*.pyc
+*.pyo
+*.log
+
+
+# --- Portfolio-safe additions ---
+# =============================================================================
+# Portfolio-safe .gitignore — keeps secrets & client data OFF GitHub
+# Local .env files stay on disk; they are never committed.
+# =============================================================================
+
+# --- Secrets & credentials (NEVER commit) ---
+.env
+.env.*
+!.env.example
+!.env.*.example
+credentials.json
+credentials.*.json
+!credentials.example.json
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+.secrets/
+
+# Personal access notes (contain server logins/passwords)
+access.md
+access*.md
+accesstennis.md
+accessgo.md
+*access*.md
+!docs/access-control.md
+
+# --- Local runtime data ---
+.data/
+data/
+*.rsc
+*.sql
+*.sql.gz
+*.dump
+backups/
+backup/
+*.session
+*.session-journal
+
+# --- Dependencies & build ---
+node_modules/
+vendor/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# --- Framework output ---
+.next/
+out/
+build/
+dist/
+.nuxt/
+.output/
+.cache/
+.parcel-cache/
+.turbo/
+.vercel/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+myenv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+celerybeat-schedule
+celerybeat.pid
+htmlcov/
+.coverage
+
+# --- PHP / Composer ---
+composer.phar
+
+# --- Logs & OS ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# --- IDE ---
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# --- Archives with potentially licensed content ---
+elementor-pro*.zip
+*.zip
+!public/**/*.zip
+
+# --- Large media (optional — uncomment if needed) ---
+# *.mp4
+# *.mov
+
+# --- TypeScript ---
+*.tsbuildinfo
+next-env.d.ts
+
+# --- Misc local config ---
+*_vhost.conf
+.codegpt
+skills-lock.json
+key.md
+keys.md
+*.key.md

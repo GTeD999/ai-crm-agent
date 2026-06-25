@@ -1,0 +1,219 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "search_properties",
+      "description": "Ищет объекты недвижимости в базе агентства по критериям клиента. Использует семантический поиск + фильтры. Возвращает топ-5 объектов с основными параметрами. Вызывай, когда у тебя есть достаточно критериев: тип, бюджет ИЛИ район ИЛИ количество комнат — хотя бы 2 из этих фильтров.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query_text": {
+            "type": "string",
+            "description": "Свободное текстовое описание желаемого объекта для семантического поиска. Например: 'двушка с большой кухней рядом с парком'. Опционально, но улучшает релевантность."
+          },
+          "city": {
+            "type": "string",
+            "description": "Город"
+          },
+          "districts": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Список районов города"
+          },
+          "property_type": {
+            "type": "string",
+            "enum": ["apartment", "house", "townhouse", "commercial", "land"],
+            "description": "Тип недвижимости"
+          },
+          "deal_type": {
+            "type": "string",
+            "enum": ["buy", "rent"],
+            "description": "Тип сделки: покупка или аренда"
+          },
+          "rooms": {
+            "type": "array",
+            "items": {"type": "string", "enum": ["studio", "1", "2", "3", "4", "5+"]},
+            "description": "Список вариантов количества комнат (клиент может рассматривать несколько)"
+          },
+          "price_min": {
+            "type": "integer",
+            "description": "Минимальная цена в рублях"
+          },
+          "price_max": {
+            "type": "integer",
+            "description": "Максимальная цена в рублях"
+          },
+          "area_min": {
+            "type": "number",
+            "description": "Минимальная площадь в м²"
+          },
+          "area_max": {
+            "type": "number",
+            "description": "Максимальная площадь в м²"
+          }
+        },
+        "required": ["deal_type"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_property_details",
+      "description": "Получить детальную информацию о конкретном объекте по его ID. Используй, когда клиент спрашивает подробности об уже показанном варианте: этаж, инфраструктура, ремонт, документы.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "property_id": {
+            "type": "string",
+            "description": "UUID объекта из результатов search_properties"
+          }
+        },
+        "required": ["property_id"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "search_knowledge_base",
+      "description": "Ищет информацию в базе знаний агентства: условия ипотечных программ, описание ЖК, типовые вопросы про сделки, документы. Используй для вопросов про ипотеку, ЖК, общие процессы. НЕ используй для юридических вопросов — их сразу transfer_to_manager.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Поисковый запрос на естественном языке"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["mortgage", "complex", "faq", "process"],
+            "description": "Категория знаний для фильтра. Опционально."
+          }
+        },
+        "required": ["query"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "save_lead",
+      "description": "Сохраняет/обновляет данные клиента и его потребности в БД. Вызывай ПОСЛЕ получения согласия на обработку ПД, когда узнал хотя бы 2-3 ключевых критерия (тип + бюджет + район или комнаты). Можно вызывать несколько раз — данные мержатся.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string", "description": "Имя клиента"},
+          "phone": {"type": "string", "description": "Телефон в формате +7XXXXXXXXXX"},
+          "property_type": {"type": "string", "enum": ["apartment", "house", "townhouse", "commercial", "land"]},
+          "deal_type": {"type": "string", "enum": ["buy", "rent"]},
+          "new_or_secondary": {"type": "string", "enum": ["new", "secondary", "any"]},
+          "rooms": {"type": "string", "description": "studio, 1, 2, 3, 4, 5+"},
+          "price_min": {"type": "integer"},
+          "price_max": {"type": "integer"},
+          "area_min": {"type": "number"},
+          "area_max": {"type": "number"},
+          "districts": {"type": "array", "items": {"type": "string"}},
+          "city": {"type": "string"},
+          "purpose": {"type": "string", "enum": ["live", "invest", "rent_out"]},
+          "timeline": {"type": "string", "enum": ["asap", "1-3_months", "3-6_months", "6+_months"]},
+          "mortgage_needed": {"type": "boolean"},
+          "has_first_payment": {"type": "boolean"},
+          "first_payment_amount": {"type": "integer"},
+          "selling_other_property": {"type": "boolean"},
+          "materinsky_capital": {"type": "boolean"},
+          "additional_notes": {"type": "string", "description": "Дополнительные требования: этаж, ремонт, инфраструктура и т.п."}
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "book_viewing",
+      "description": "Бронирует слот на просмотр конкретного объекта. Перед вызовом обязательно: 1) имя и телефон клиента есть в save_lead, 2) согласие на ПД получено, 3) клиент явно подтвердил дату и время.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "property_id": {
+            "type": "string",
+            "description": "UUID объекта"
+          },
+          "scheduled_at": {
+            "type": "string",
+            "description": "Дата и время просмотра в ISO 8601 с таймзоной, например 2026-05-15T14:00:00+03:00"
+          },
+          "client_phone": {
+            "type": "string",
+            "description": "Телефон клиента для подтверждения"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Дополнительные пожелания клиента: онлайн/офлайн, нужна машина и т.п."
+          }
+        },
+        "required": ["property_id", "scheduled_at", "client_phone"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "request_pd_consent",
+      "description": "Помечает диалог как ожидающий согласие на обработку ПД. После вызова нужно дождаться явного согласия клиента в следующем сообщении (да/согласен/ок и т.п.). НЕ вызывай save_lead или book_viewing до получения согласия.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "confirm_pd_consent",
+      "description": "Подтверждает согласие на обработку ПД, полученное в текущем сообщении. Вызывай ТОЛЬКО если клиент явно ответил «да», «согласен», «ок» на вопрос о согласии.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "transfer_to_manager",
+      "description": "Передаёт диалог живому менеджеру через создание сделки в Битрикс24. После этого бот замолкает для этого клиента. Используй в случаях из системного промпта (юр.вопросы, жалобы, сложные сделки, явный запрос, бюджет 20м+).",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "enum": [
+              "human_request",
+              "legal_question",
+              "complaint",
+              "premium_budget",
+              "complex_deal",
+              "ready_to_close",
+              "stuck_in_dialog",
+              "other"
+            ],
+            "description": "Причина передачи менеджеру"
+          },
+          "urgency": {
+            "type": "string",
+            "enum": ["normal", "high"],
+            "description": "Срочность. high — если жалоба, негатив, или клиент готов к сделке прямо сейчас."
+          },
+          "summary": {
+            "type": "string",
+            "description": "Краткое содержание диалога для менеджера (3-5 предложений): что искал клиент, ключевые критерии, что обсудили, в чём вопрос."
+          }
+        },
+        "required": ["reason", "summary"]
+      }
+    }
+  }
+]

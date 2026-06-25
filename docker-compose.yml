@@ -1,0 +1,17 @@
+services:
+  novactive-ai-manager:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: novactive-ai-manager
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - supabase_default
+    expose:
+      - "8000"
+
+networks:
+  supabase_default:
+    external: true
