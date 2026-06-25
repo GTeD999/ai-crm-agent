@@ -11,7 +11,7 @@ router = APIRouter()
 async def health() -> dict[str, str | bool]:
     return {
         "ok": True,
-        "service": "novactive-ai-manager",
+        "service": "officee-ai-manager",
         "env": settings.app_env,
         "telegram_enabled": settings.telegram_enabled,
     }

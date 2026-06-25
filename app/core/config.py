@@ -42,7 +42,7 @@ class Settings(BaseSettings):
     agency_name: str = "Новактив"
     agency_phone: str | None = None
     agency_timezone: str = "Asia/Novosibirsk"
-    property_site_base_url: str = "https://novactiv.ru/property"
+    property_site_base_url: str = "https://example.com/property"
     quickdeal_feed_url: str | None = None
     quickdeal_sync_batch_size: int = 100
     quickdeal_sync_interval_minutes: int = 60

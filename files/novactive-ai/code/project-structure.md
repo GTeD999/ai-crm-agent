@@ -1,7 +1,7 @@
 # Структура кода
 
 ```
-novactive-bot/
+officee-bot/
 ├── app/
 │   ├── __init__.py
 │   ├── main.py                    # FastAPI + aiogram entrypoint

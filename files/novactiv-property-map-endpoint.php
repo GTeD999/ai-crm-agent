@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Novactiv Property Map Endpoint
+ * Plugin Name: Office Property Map Endpoint
  * Description: Exposes published property links keyed by QuickDeal object id.
  */
 
@@ -9,14 +9,14 @@ if (!defined('ABSPATH')) {
 }
 
 add_action('rest_api_init', function () {
-    register_rest_route('novactiv/v1', '/property-map', [
+    register_rest_route('office/v1', '/property-map', [
         'methods' => 'GET',
-        'callback' => 'novactiv_property_map_endpoint',
+        'callback' => 'office_property_map_endpoint',
         'permission_callback' => '__return_true',
     ]);
 });
 
-function novactiv_property_map_endpoint(WP_REST_Request $request): WP_REST_Response
+function office_property_map_endpoint(WP_REST_Request $request): WP_REST_Response
 {
     global $wpdb;
 

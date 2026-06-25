@@ -4,7 +4,7 @@
 
 ```bash
 # 1. Клонировать репозиторий
-git clone <repo> novactive-bot && cd novactive-bot
+git clone <repo> officee-bot && cd officee-bot
 
 # 2. Создать виртуальное окружение
 python3.11 -m venv .venv
@@ -47,8 +47,8 @@ APP_ENV=development python -m app.main
 
 ```bash
 # На сервере
-git clone <repo> /opt/novactive-bot
-cd /opt/novactive-bot
+git clone <repo> /opt/officee-bot
+cd /opt/officee-bot
 cp .env.example .env
 nano .env  # заполнить
 
@@ -57,7 +57,7 @@ docker compose up -d
 
 # Установка webhook в Telegram
 curl -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/setWebhook" \
-  -d "url=https://bot.novactive.ru/api/telegram/webhook&secret_token=$TELEGRAM_WEBHOOK_SECRET"
+  -d "url=https://bot.officee.ru/api/telegram/webhook&secret_token=$TELEGRAM_WEBHOOK_SECRET"
 ```
 
 ### docker-compose.yml
@@ -97,7 +97,7 @@ volumes:
 ### Caddyfile
 
 ```
-bot.novactive.ru {
+bot.officee.ru {
     reverse_proxy bot:8000
 }
 ```

@@ -256,7 +256,7 @@ ADMIN_HTML = """
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Novactive AI Manager</title>
+  <title>Officee AI Manager</title>
   <style>
     :root { color-scheme: light; --bg:#f6f7f9; --panel:#fff; --text:#18202a; --muted:#667085; --line:#d9dee7; --accent:#0f766e; --bad:#b42318; }
     * { box-sizing: border-box; }
@@ -290,7 +290,7 @@ ADMIN_HTML = """
 </head>
 <body>
   <header>
-    <div><h1>Novactive AI Manager</h1><div class="muted">Telegram, Bitrix, лиды и расходы OpenAI</div></div>
+    <div><h1>Officee AI Manager</h1><div class="muted">Telegram, Bitrix, лиды и расходы OpenAI</div></div>
     <div><button id="aiToggle">Загрузка...</button></div>
   </header>
   <main>

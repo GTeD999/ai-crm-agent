@@ -327,7 +327,7 @@
           },
           "property_id": {
             "type": "string",
-            "description": "ID объекта, если передача связана с конкретным объектом. Можно передавать ID сайта из ссылки novactiv.ru/property/2638/ или внутренний QuickDeal ID."
+            "description": "ID объекта, если передача связана с конкретным объектом. Можно передавать ID сайта из ссылки example.com/property/2638/ или внутренний QuickDeal ID."
           },
           "client_contact_status": {
             "type": "string",

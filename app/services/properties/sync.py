@@ -40,7 +40,7 @@ class QuickDealSyncService:
 
 
 async def fetch_site_urls(client: httpx.AsyncClient) -> dict[str, str]:
-    url = "https://novactiv.ru/wp-json/novactiv/v1/property-map"
+    url = "https://example.com/wp-json/office/v1/property-map"
     try:
         response = await client.get(url)
         response.raise_for_status()

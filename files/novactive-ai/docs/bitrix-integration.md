@@ -8,7 +8,7 @@
 
 1. В Битрикс24: Приложения → Разработчикам → Другое → Входящий вебхук
 2. Дать права: `crm` (Лиды, Сделки, Контакты, Дела), `user` (пользователи), `calendar` (опционально, для просмотров)
-3. Скопировать URL вида: `https://novactive.bitrix24.ru/rest/1/abc123def456/`
+3. Скопировать URL вида: `https://officee.bitrix24.ru/rest/1/abc123def456/`
 
 Сохранить в `.env` как `BITRIX_WEBHOOK_URL`.
 
@@ -63,7 +63,7 @@ async def transfer_to_manager_in_bitrix(
         "ASSIGNED_BY_ID": settings.BITRIX_DEFAULT_MANAGER_ID,
         "SOURCE_ID": "OTHER",
         "COMMENTS": f"СРОЧНОСТЬ: {urgency}\nПРИЧИНА: {reason}\n\nКРАТКО:\n{summary}\n\n{format_lead_comment(lead)}",
-        "UF_CRM_AI_DIALOG_URL": f"https://your-admin.novactive.ru/dialogs/{user.id}",
+        "UF_CRM_AI_DIALOG_URL": f"https://your-admin.officee.ru/dialogs/{user.id}",
     }
     
     response = await httpx_client.post(

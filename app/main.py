@@ -53,7 +53,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 
 
 def create_app() -> FastAPI:
-    app = FastAPI(title="Novactive AI Manager", version="0.1.0", lifespan=lifespan)
+    app = FastAPI(title="Officee AI Manager", version="0.1.0", lifespan=lifespan)
     app.include_router(health_router)
     app.include_router(admin_router)
     app.include_router(telegram_router)

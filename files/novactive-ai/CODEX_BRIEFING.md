@@ -77,7 +77,7 @@
 Не одним промптом на всё. Разбивать по модулям:
 
 ```
-Прочитай весь пакет в папке novactive-ai/. 
+Прочитай весь пакет в папке officee-ai/. 
 Реализуй модуль app/db/ (client, models, repositories для users и messages) 
 согласно code/project-structure.md и schemas/database.sql.
 Используй supabase-py async client и pydantic 2.x.
