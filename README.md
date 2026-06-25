@@ -1,26 +1,10 @@
-# Novactiv AI Manager
+# AI CRM Agent
 
-AI-powered real estate agency manager — handles client conversations via Telegram, classifies intents, searches properties, and integrates with Bitrix24 CRM.
-
-## Features
-
-- Telegram bot with webhook support
-- Dialog engine with conversation memory
-- Intent classification (greeting, property request, legal, complaint)
-- Property search service with tool calling
-- Bitrix24 CRM integration (lead transfer, silent mode)
-- OpenAI-powered chat with up to 5 tool iterations
-- Follow-up scheduler skeleton
+AI-powered conversational agent for client communication — classifies intents, searches catalog, and integrates with CRM webhooks.
 
 ## Tech stack
 
-| Layer | Technology |
-|-------|-----------|
-| Bot | aiogram 3.x |
-| API | FastAPI (Python 3.11+) |
-| AI | OpenAI API |
-| Database | Supabase |
-| CRM | Bitrix24 webhooks |
+Python · FastAPI · aiogram · OpenAI · Supabase
 
 ## Getting started
 
@@ -32,8 +16,4 @@ uvicorn app.main:app --reload
 
 ## Security
 
-Source code only — no API keys, Telegram tokens, or client data included.
-
-## License
-
-Private / portfolio project.
+Source code only — no API keys or client data included.
